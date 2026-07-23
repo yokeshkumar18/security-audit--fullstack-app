@@ -1,6 +1,6 @@
 # Security Audit Log Dashboard
 
-**Live Demo (Frontend):** [Pending Vercel URL]
+**Live Demo (Frontend):** [https://security-audit-fullstack-app.vercel.app/](https://security-audit-fullstack-app.vercel.app/)
 **Live API (Backend):** [https://security-audit-fullstack-app.onrender.com](https://security-audit-fullstack-app.onrender.com)
 
 A robust, full-stack (MERN) application designed for security engineers to seamlessly upload, view, and investigate massive volumes of system audit logs without performance degradation.
