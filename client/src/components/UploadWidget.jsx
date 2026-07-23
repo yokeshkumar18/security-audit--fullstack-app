@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import axios from 'axios';
 import { Upload, Loader2 } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 const UploadWidget = ({ onUploadSuccess }) => {
   const fileInputRef = useRef(null);
@@ -17,7 +18,7 @@ const UploadWidget = ({ onUploadSuccess }) => {
       try {
         jsonData = JSON.parse(fileText);
       } catch (err) {
-        alert("Invalid JSON file.");
+        toast.error("Invalid JSON file.");
         setIsUploading(false);
         return;
       }
@@ -29,11 +30,11 @@ const UploadWidget = ({ onUploadSuccess }) => {
 
       const API_URL = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/logs/bulk` : 'http://localhost:5000/api/logs/bulk';
       await axios.post(API_URL, jsonData);
-      alert(`Successfully uploaded ${jsonData.length} records!`);
+      toast.success(`Successfully uploaded ${jsonData.length} records!`);
       if (onUploadSuccess) onUploadSuccess();
     } catch (error) {
       console.error('Upload error:', error);
-      alert('Failed to upload logs. Check console.');
+      toast.error('Failed to upload logs.');
     } finally {
       setIsUploading(false);
       // Reset input so the same file can be selected again if needed

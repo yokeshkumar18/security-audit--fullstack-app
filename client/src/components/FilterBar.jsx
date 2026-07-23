@@ -1,8 +1,22 @@
+import { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 
 const FilterBar = ({ filters, onFilterChange }) => {
-  
-  const handleInputChange = (e) => {
+  const [localSearch, setLocalSearch] = useState(filters.search);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      if (localSearch !== filters.search) {
+        onFilterChange({ ...filters, search: localSearch });
+      }
+    }, 300);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [localSearch]);
+
+  const handleSelectChange = (e) => {
     const { name, value } = e.target;
     onFilterChange({ ...filters, [name]: value });
   };
@@ -16,8 +30,8 @@ const FilterBar = ({ filters, onFilterChange }) => {
           className="search-input" 
           placeholder="Search actor or resource..." 
           name="search"
-          value={filters.search}
-          onChange={handleInputChange}
+          value={localSearch}
+          onChange={(e) => setLocalSearch(e.target.value)}
         />
       </div>
 
@@ -25,7 +39,7 @@ const FilterBar = ({ filters, onFilterChange }) => {
         className="filter-select"
         name="severity"
         value={filters.severity}
-        onChange={handleInputChange}
+        onChange={handleSelectChange}
       >
         <option value="All">All Severities</option>
         <option value="HIGH">High</option>
@@ -37,7 +51,7 @@ const FilterBar = ({ filters, onFilterChange }) => {
         className="filter-select"
         name="role"
         value={filters.role}
-        onChange={handleInputChange}
+        onChange={handleSelectChange}
       >
         <option value="All">All Roles</option>
         <option value="admin">Admin</option>

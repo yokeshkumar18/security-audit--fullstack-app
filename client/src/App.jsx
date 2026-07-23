@@ -5,6 +5,7 @@ import DataTable from './components/DataTable';
 import Pagination from './components/Pagination';
 import FilterBar from './components/FilterBar';
 import UploadWidget from './components/UploadWidget';
+import { Toaster } from 'react-hot-toast';
 import './App.css';
 
 const API_URL = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/logs` : 'http://localhost:5000/api/logs';
@@ -69,6 +70,7 @@ function App() {
 
   return (
     <div className="dashboard-container">
+      <Toaster position="top-right" />
       <header className="dashboard-header">
         <div className="header-title">
           <Activity className="header-icon" />

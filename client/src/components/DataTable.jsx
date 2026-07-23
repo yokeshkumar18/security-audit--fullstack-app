@@ -1,12 +1,23 @@
-import { ChevronUp, ChevronDown } from 'lucide-react';
+import { ChevronUp, ChevronDown, Loader2, Database } from 'lucide-react';
 
 const DataTable = ({ logs, sort, onSortChange, loading }) => {
   if (loading) {
-    return <div className="loading-spinner">Loading logs...</div>;
+    return (
+      <div className="loading-spinner">
+        <Loader2 className="animate-spin" size={32} style={{ margin: '0 auto', marginBottom: '1rem', color: 'var(--accent)' }} />
+        <p>Loading logs...</p>
+      </div>
+    );
   }
 
   if (logs.length === 0) {
-    return <div className="loading-spinner">No logs found. Adjust filters or upload data.</div>;
+    return (
+      <div className="empty-state">
+        <Database size={48} className="empty-icon" />
+        <h3>No logs found</h3>
+        <p>Adjust your search filters or upload a new JSON dataset.</p>
+      </div>
+    );
   }
 
   const renderSortIcon = (field) => {
