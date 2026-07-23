@@ -27,7 +27,8 @@ const UploadWidget = ({ onUploadSuccess }) => {
         jsonData = [jsonData];
       }
 
-      await axios.post('http://localhost:5000/api/logs/bulk', jsonData);
+      const API_URL = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/logs/bulk` : 'http://localhost:5000/api/logs/bulk';
+      await axios.post(API_URL, jsonData);
       alert(`Successfully uploaded ${jsonData.length} records!`);
       if (onUploadSuccess) onUploadSuccess();
     } catch (error) {

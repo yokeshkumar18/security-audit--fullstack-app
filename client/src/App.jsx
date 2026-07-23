@@ -7,7 +7,7 @@ import FilterBar from './components/FilterBar';
 import UploadWidget from './components/UploadWidget';
 import './App.css';
 
-const API_URL = 'http://localhost:5000/api/logs';
+const API_URL = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/logs` : 'http://localhost:5000/api/logs';
 
 function App() {
   const [logs, setLogs] = useState([]);
